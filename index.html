@@ -20,14 +20,24 @@
       z-index: 100000;
 	  bottom: 25px;
 	  left :15px;
-	  background: #faebd7a6;
+	  background: #21201f87;;
+      }
+    #popup{
+      position: absolute;
+      z-index: 100000;
+	  top: 25px;
+	  right :15px;
+	  background: #21201f87;;
       }
 </style>
 </head>
 <body>
  <div id="map" class="map" style="height:97vh">
        <div  id="legend">
-	   <div id="legend_content" style="margin: 20px;"></div>
+	   <div id="legend_content" class="text-white" style="margin: 20px;"></div>
+        </div>
+		<div  id="popup" style="display:none">
+	   <div id="popup_content" class="text-white" style="margin: 20px;"></div>
         </div>
  </div>
  <div class="ol-home ol-unselectable ol-control">
@@ -136,6 +146,21 @@ var div = '<b>LEGEND :</b></br>', grades = [0, 10, 20, 50, 100, 200, 500, 1000],
     }
 	
  $('#legend_content').html(div);
+ 
+ 
+ selectPointerMove.on('select', function(e) {
+  if (e.selected.length != 0) {
+    var st_name = e.selected[0].H.name;
+    var st_dense = e.selected[0].H.density;
+    $('#popup').show();
+    $('#popup_content').html('<h5>'+st_name+'</h5><p><b><img src="image/pop.png" style="height:40px;width:40px">Population Density</b> - '+st_dense+'</p>');
+
+  } else {
+   
+       $('#popup').hide();
+  }
+
+})
 	
 
 </script>
